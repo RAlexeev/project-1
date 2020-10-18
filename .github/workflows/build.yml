@@ -8,14 +8,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
+    name: Build firmware
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: West Build
+      - name: Use Docker with nRF Connect SDK
         uses: 'docker://ralexeev/sdk-nrf:latest'
-        id: west-build
+      - name: West Build
         run: west build -b nrf52840dk_nrf52840
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
