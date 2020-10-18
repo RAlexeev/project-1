@@ -14,18 +14,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: West Source
+      - name: Use Docker with nRF Connect SDK
         uses: 'docker://ralexeev/sdk-nrf:latest'
-        with: 
-          entrypoint: source 
-          args: '/workdir/ncs/zephyr/zephyr-env.sh'
-          shell: bash
+
+      - name: ls
+        run: |
+          ls -al
+
+      - name: pwd
+        run: |
+          pwd
+
+      - name: Docker container list
+        run: |
+          docker container ps -a
+
       - name: West Build
-        uses: 'docker://ralexeev/sdk-nrf:latest'
-        with: 
-          entrypoint: west 
-          args: 'build -b nrf52840dk_nrf52840'
-          shell: bash
+        run: |
+          docker run -it ralexeev/sdk-nrf /bin/bash -c 'source /workdir/ncs/zephyr/zephyr-env.sh && west build -b nrf52840dk_nrf52840'
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
