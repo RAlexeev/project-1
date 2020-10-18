@@ -14,6 +14,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: West Source
+        uses: 'docker://ralexeev/sdk-nrf:latest'
+        with: 
+          entrypoint: source 
+          args: '/workdir/ncs/zephyr/zephyr-env.sh'
       - name: West Build
         uses: 'docker://ralexeev/sdk-nrf:latest'
         with: 
