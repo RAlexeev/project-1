@@ -16,13 +16,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: ls
-        run: |
-          ls -al
-      - name: pwd
-        run: |
-          pwd
-
       - name: West Build
         shell: bash
         run: |
