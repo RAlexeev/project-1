@@ -8,35 +8,28 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
+    container:
+      image: ghcr.io/ralexeev/sdk-nrf:latest
     name: Build firmware
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Use Docker with nRF Connect SDK
-        uses: 'docker://ralexeev/sdk-nrf:latest'
-
-      - name: ls 1
+      - name: ls
         run: |
           ls -al
-      - name: pwd 1
+      - name: pwd
         run: |
           pwd
 
-      - name: ls all
-        uses: 'docker://ralexeev/sdk-nrf:latest'
+      - name: West Build
+        run: |
+          source /workdir/ncs/zephyr/zephyr-env.sh
+          west build -b nrf52840dk_nrf52840
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
         with:
-          entrypoint: /bin/bash
-          args: |
-            -c "\
-            ls -al /workdir && \
-            ls -al /workdir/ncs && \
-            ls -al /workdir/ncs/zephyr"
-
-      - name: ls 2
-        run: |
-          ls -al
-      - name: pwd 2
-        run: |
-          pwd
+          name: "nrf52840dk_nrf52840_build"
+          path: build/zephyr/
