@@ -29,7 +29,7 @@ jobs:
 
       - name: West Build
         run: |
-          'docker run -it ralexeev/sdk-nrf /bin/bash -c "source /workdir/ncs/zephyr/zephyr-env.sh"'
+          'docker run -it ralexeev/sdk-nrf /bin/bash -c "ls -al /workdir && ls -al /workdir/ncs && ls -al /workdir/ncs/zephyr"'
 
       - name: ls 2
         run: |
