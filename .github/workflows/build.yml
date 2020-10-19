@@ -24,6 +24,7 @@ jobs:
           pwd
 
       - name: West Build
+        shell: bash
         run: |
           source /workdir/ncs/zephyr/zephyr-env.sh
           west build -b nrf52840dk_nrf52840
