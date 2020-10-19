@@ -28,6 +28,7 @@ jobs:
           docker container ps -a
 
       - name: West Build
+        shell: bash
         run: |
           'docker run -it ralexeev/sdk-nrf /bin/bash -c "ls -al /workdir && ls -al /workdir/ncs && ls -al /workdir/ncs/zephyr"'
 
