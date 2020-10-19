@@ -8,24 +8,35 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
-    container:
-      image: ghcr.io/ralexeev/sdk-nrf:latest
     name: Build firmware
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: ls
+      - name: Use Docker with nRF Connect SDK
+        uses: 'docker://ralexeev/sdk-nrf:latest'
+
+      - name: ls 1
         run: |
           ls -al
-
-      - name: pwd
+      - name: pwd 1
         run: |
           pwd
 
       - name: ls all
+        uses: 'docker://ralexeev/sdk-nrf:latest'
+        with:
+          entrypoint: /bin/bash
+          args: |
+            -c "\
+            ls -al /workdir && \
+            ls -al /workdir/ncs && \
+            ls -al /workdir/ncs/zephyr"
+
+      - name: ls 2
         run: |
-          ls -al /workdir
-          ls -al /workdir/ncs
-          ls -al /workdir/ncs/zephyr
+          ls -al
+      - name: pwd 2
+        run: |
+          pwd
