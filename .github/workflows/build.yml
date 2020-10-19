@@ -23,3 +23,9 @@ jobs:
       - name: pwd
         run: |
           pwd
+
+      - name: ls all
+        run: |
+          ls -al /workdir
+          ls -al /workdir/ncs
+          ls -al /workdir/ncs/zephyr
